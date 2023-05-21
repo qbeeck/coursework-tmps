@@ -15,64 +15,19 @@
     </mat-card-subtitle>
   </mat-card>
 
-  <ng-container *ngFor="let mainFirmControl of firmControls.controls; let i = index">
-    <ng-container
-      *ngIf="mainFirmControl.value.type === 'section'"
-      [ngTemplateOutlet]="section"
-      [ngTemplateOutletContext]="{ $implicit: mainFirmControl }"
-    ></ng-container>
+  <ng-container *ngFor="let firmControl of firmControls.controls; let i = index">
+    <ng-container *ngIf="firmControl.value.type === 'section'">
+      <app-section-control [sectionFormGroup]="$any(firmControl)" (deleted)="deleteSection(i)"></app-section-control>
+    </ng-container>
 
-    <ng-container
-      *ngIf="mainFirmControl.value.type === 'question'"
-      [ngTemplateOutlet]="question"
-      [ngTemplateOutletContext]="{ $implicit: mainFirmControl }"
-    ></ng-container>
+    <ng-container *ngIf="firmControl.value.type === 'question'">
+      <app-question-control [questionFormGroup]="$any(firmControl)" (deleted)="deleteQuestion(i)"></app-question-control>
+    </ng-container>
+
     <hr>
   </ng-container>
 
-  <button mat-stroked-button (click)="addSection()">Add section</button>
-  <button mat-stroked-button (click)="addQuestion(firm)">Add question</button>
+  <button mat-stroked-button type="button" (click)="addSection()">Add section</button>
+  <button mat-stroked-button type="button"  (click)="addQuestion(firm)">Add question</button>
   <button mat-stroked-button>Save</button>
 </form>
-
-<ng-template #section let-sectionFirmControl>
-  <mat-card [formGroup]="sectionFirmControl">
-    <mat-card-title>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Type</mat-label>
-        <input matInput formControlName="type" />
-      </mat-form-field>
-    </mat-card-title>
-  </mat-card>
-
-  <ng-container *ngFor="let sectionFirmControlchik of sectionFirmControl.controls.firmControls.controls; let i = index">
-    <ng-container [ngTemplateOutlet]="question" [ngTemplateOutletContext]="{ $implicit: sectionFirmControlchik }"></ng-container>
-  </ng-container>
-
-  <button mat-stroked-button (click)="addQuestion(sectionFirmControl)">Add question</button>
-</ng-template>
-
-<ng-template #question let-simpleFirmControl>
-  <mat-card [formGroup]="simpleFirmControl">
-    <mat-card-title>
-      <mat-form-field>
-        <mat-label>Question</mat-label>
-        <input matInput formControlName="question" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Type</mat-label>
-        <input matInput formControlName="type" />
-      </mat-form-field>
-
-      <mat-card-actions align="end">
-        <button mat-button>delete</button>
-      </mat-card-actions>
-    </mat-card-title>
-  </mat-card>
-</ng-template>

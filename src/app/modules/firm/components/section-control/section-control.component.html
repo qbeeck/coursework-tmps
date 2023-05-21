@@ -1,0 +1,23 @@
+<mat-card [formGroup]="sectionFormGroup">
+  <mat-card-title>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" />
+    </mat-form-field>
+  </mat-card-title>
+
+  <mat-card-actions align="end">
+    <button mat-button type="button" (click)="deleted.emit()">delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-container *ngFor="let sectionFirmControlchik of $any(sectionFormGroup.controls).firmControls.controls; let i = index">
+  <app-question-control [questionFormGroup]="sectionFirmControlchik" (deleted)="deleteQuestion(i)"></app-question-control>
+</ng-container>
+
+<button mat-stroked-button type="button" (click)="addQuestion()">Add question</button>

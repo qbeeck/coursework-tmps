@@ -42,4 +42,12 @@ export class CreateFirmComponent {
 
     (abstract.get('firmControls') as FormArray).push(question);
   }
+
+  deleteQuestion(i: number) {
+    (this.firm.get('firmControls') as FormArray).removeAt(i);
+  }
+
+  deleteSection(i: number) {
+    (this.firm.get('firmControls') as FormArray).removeAt(i);
+  }
 }
