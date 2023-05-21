@@ -4,15 +4,17 @@
   "scripts": {
     "ng": "ng",
     "start:dev": "ng serve  --configuration development",
-    "start:prod": "ng serve  --configuration production",
+    "start:prod": "ng serve  --configuration production"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
+    "@angular/cdk": "^14.2.7",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
     "@angular/forms": "^14.2.0",
+    "@angular/material": "^14.2.7",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
