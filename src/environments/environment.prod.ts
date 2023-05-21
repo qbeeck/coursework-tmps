@@ -1,3 +1,5 @@
-export const environment = {
+import { EnvironmentI } from '@core';
+
+export const environment: EnvironmentI = {
   production: true
 };
