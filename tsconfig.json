@@ -23,7 +23,9 @@
       "dom"
     ],
     "paths": {
-      "@core": ["./src/app/core"]
+      "@core": ["./src/app/core"],
+      "@models": ["./src/app/models"],
+      "@modules/*": ["./src/app/modules/*"],
     }
   },
   "angularCompilerOptions": {
