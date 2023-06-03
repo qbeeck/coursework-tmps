@@ -30,7 +30,7 @@ class QuestionCustomFormControl extends CustomFormControl {
   }
 }
 
-class CustomForm {
+export class CustomForm {
   name = '';
   description = '';
   customFormControls: CustomFormControl[] = [];
@@ -85,9 +85,21 @@ export class CustomFormBuilder {
 export class CustomFormTemplateBuilder {
   private builder!: CustomFormBuilder;
 
-
   setBuilder(builder: CustomFormBuilder): void {
     this.builder = builder;
+  }
+
+  buildEmptyForm(): void {
+    this.builder.setName('New Form');
+    this.builder.setDescription('New Description');
+
+    const questions = [
+      new QuestionCustomFormControl('Example', ''),
+    ];
+
+    questions.forEach(question => {
+      this.builder.addControl(question);
+    });
   }
 
   buildContactInformationForm(): void {

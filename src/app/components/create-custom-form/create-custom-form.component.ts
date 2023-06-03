@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +9,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SectionControlComponent } from '../section-control/section-control.component';
 import { QuestionControlComponent } from '../question-control/question-control.component';
+import { FormComponent } from '@components/form';
+import { CustomForm, CustomFormBuilder, CustomFormTemplateBuilder } from '@models';
 
 export type SectionFormGroup = FormGroup<{
   name: FormControl<string | null>;
@@ -36,53 +38,26 @@ export type QuestionFormGroup = FormGroup<{
     SectionControlComponent,
     QuestionControlComponent,
     MatExpansionModule,
+    FormComponent,
   ],
   templateUrl: './create-custom-form.component.html',
   styleUrls: ['./create-custom-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateCustomFormComponent {
-  customForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    customFormControls: new FormArray<QuestionFormGroup | SectionFormGroup>([
-      this.formBuilder.group({ question: 'he', type: 'question', answer: '' }),
-    ]),
-  });
+  form = new CustomForm();
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-  ) { }
+  formb = new CustomFormBuilder();
+  template = new CustomFormTemplateBuilder();
 
-  addSection(): void {
-    const section = this.formBuilder.group({
-      name: '',
-      type: 'section',
-      sectionControls: new FormArray<QuestionFormGroup>([]),
-    });
+  constructor() {
+    this.template.setBuilder(this.formb);
+    this.template.buildPartyInviteForm();
 
-    this.customForm.controls.customFormControls.push(section);
+    this.form = this.formb.build();
   }
 
-  addQuestion(): void {
-    const question = this.formBuilder.group({
-      question: '',
-      type: 'question',
-      answer: [{value: '', disabled: false }]
-    });
-
-    this.customForm.controls.customFormControls.push(question);
-  }
-
-  deleteQuestion(i: number) {
-    this.customForm.controls.customFormControls.removeAt(i);
-  }
-
-  deleteSection(i: number) {
-    this.customForm.controls.customFormControls.removeAt(i);
-  }
-
-  save(): void {
-    console.log(this.customForm.value);
+  save(value: any): void {
+    console.log(value);
   }
 }
