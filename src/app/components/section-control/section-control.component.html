@@ -5,10 +5,7 @@
       <input matInput formControlName="name" />
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <input matInput formControlName="type" />
-    </mat-form-field>
+    {{ sectionFormGroup.value.type }}
   </mat-card-title>
 
   <mat-card-actions align="end">

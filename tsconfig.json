@@ -24,8 +24,8 @@
     ],
     "paths": {
       "@core": ["./src/app/core"],
-      "@models": ["./src/app/models"],
-      "@modules/*": ["./src/app/modules/*"],
+      "@models": ["src/app/entities"],
+      "@components/*": ["src/app/components/*"],
     }
   },
   "angularCompilerOptions": {

@@ -5,10 +5,7 @@
       <input matInput formControlName="question" />
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <input matInput formControlName="type" />
-    </mat-form-field>
+    {{ questionFormGroup.value.type }}
 
     <mat-card-actions align="end">
       <button mat-button type="button"  (click)="deleted.emit()">delete</button>

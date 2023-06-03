@@ -1,4 +1,4 @@
-<form [formGroup]="firm">
+<form [formGroup]="customForm">
   <mat-card>
     <mat-card-title>
       <mat-form-field>
@@ -15,7 +15,7 @@
     </mat-card-subtitle>
   </mat-card>
 
-  <ng-container *ngFor="let firmControl of firmControls.controls; let i = index">
+  <ng-container *ngFor="let firmControl of customFormControls.controls; let i = index">
     <ng-container *ngIf="firmControl.value.type === 'section'">
       <app-section-control [sectionFormGroup]="$any(firmControl)" (deleted)="deleteSection(i)"></app-section-control>
     </ng-container>
@@ -28,6 +28,6 @@
   </ng-container>
 
   <button mat-stroked-button type="button" (click)="addSection()">Add section</button>
-  <button mat-stroked-button type="button"  (click)="addQuestion(firm)">Add question</button>
-  <button mat-stroked-button>Save</button>
+  <button mat-stroked-button type="button" (click)="addQuestion(customForm)">Add question</button>
+  <button mat-stroked-button (click)="save()">Save</button>
 </form>
