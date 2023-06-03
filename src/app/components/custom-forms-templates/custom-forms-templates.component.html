@@ -1,0 +1,5 @@
+<mat-list>
+  <mat-list-item *ngFor="let template of templates" (click)="openLink($event, template.path)">
+    <span mat-line>{{ template.text }}</span>
+  </mat-list-item>
+</mat-list>
