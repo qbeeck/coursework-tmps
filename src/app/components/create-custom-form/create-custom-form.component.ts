@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SectionControlComponent } from '../section-control/section-control.component';
 import { QuestionControlComponent } from '../question-control/question-control.component';
@@ -23,7 +24,18 @@ export type QuestionFormGroup = FormGroup<{
 @Component({
   selector: 'app-create-custom-form',
   standalone: true,
-  imports: [NgIf, NgFor, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, SectionControlComponent, QuestionControlComponent],
+  imports: [
+    NgIf,
+    NgFor,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    SectionControlComponent,
+    QuestionControlComponent,
+    MatExpansionModule,
+  ],
   templateUrl: './create-custom-form.component.html',
   styleUrls: ['./create-custom-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

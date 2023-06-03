@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { QuestionControlComponent } from '../question-control/question-control.component';
 import { SectionFormGroup } from '@components/create-custom-form';
@@ -12,7 +13,7 @@ import { SectionFormGroup } from '@components/create-custom-form';
 @Component({
   selector: 'app-section-control',
   standalone: true,
-  imports: [NgFor, QuestionControlComponent, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [NgFor, QuestionControlComponent, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatExpansionModule],
   templateUrl: './section-control.component.html',
   styleUrls: ['./section-control.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

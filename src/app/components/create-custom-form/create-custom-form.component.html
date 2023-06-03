@@ -2,32 +2,46 @@
   <mat-card>
     <mat-card-title>
       <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label>Form Name</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
     </mat-card-title>
 
     <mat-card-subtitle>
       <mat-form-field>
-        <mat-label>Description</mat-label>
+        <mat-label>Form Description</mat-label>
         <input matInput formControlName="description" />
       </mat-form-field>
     </mat-card-subtitle>
+
+    <button mat-stroked-button color="primary" type="button" (click)="addSection()">Add section</button>
+    <button mat-stroked-button color="primary" type="button" (click)="addQuestion()">Add question</button>
+    <button mat-stroked-button color="primary" (click)="save()">Save</button>
   </mat-card>
 
-  <ng-container *ngFor="let firmControl of customForm.controls.firmControls.controls; let i = index">
-    <ng-container *ngIf="firmControl.value.type === 'section'">
-      <app-section-control [sectionFormGroup]="$any(firmControl)" (deleted)="deleteSection(i)"></app-section-control>
+  <mat-accordion multi>
+    <ng-container *ngFor="let firmControl of customForm.controls.firmControls.controls; let i = index">
+
+      <app-section-control
+        *ngIf="firmControl.value.type === 'section'"
+        [sectionFormGroup]="$any(firmControl)"
+        (deleted)="deleteSection(i)"
+      ></app-section-control>
+
+      <mat-expansion-panel
+        *ngIf="firmControl.value.type === 'question'"
+        expanded
+        [formGroup]="firmControl"
+      >
+        <mat-expansion-panel-header>
+          <mat-form-field>
+            <mat-label>Question</mat-label>
+            <input matInput formControlName="question" />
+          </mat-form-field>
+        </mat-expansion-panel-header>
+
+        <button mat-button type="button" (click)="deleteQuestion(i)">delete</button>
+      </mat-expansion-panel>
     </ng-container>
-
-    <ng-container *ngIf="firmControl.value.type === 'question'">
-      <app-question-control [questionFormGroup]="$any(firmControl)" (deleted)="deleteQuestion(i)"></app-question-control>
-    </ng-container>
-
-    <hr>
-  </ng-container>
-
-  <button mat-stroked-button type="button" (click)="addSection()">Add section</button>
-  <button mat-stroked-button type="button" (click)="addQuestion()">Add question</button>
-  <button mat-stroked-button (click)="save()">Save</button>
+  </mat-accordion>
 </form>
