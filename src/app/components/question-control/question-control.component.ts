@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+import { QuestionFormGroup } from '@components/create-custom-form';
 
 @Component({
   selector: 'app-question-control',
@@ -14,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionControlComponent {
-  @Input() questionFormGroup!: FormGroup;
+  @Input() questionFormGroup!: QuestionFormGroup;
 
   @Output() deleted = new EventEmitter<void>();
 }

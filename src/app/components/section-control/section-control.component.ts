@@ -1,12 +1,13 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { QuestionControlComponent } from '../question-control/question-control.component';
+import { SectionFormGroup } from '@components/create-custom-form';
 
 @Component({
   selector: 'app-section-control',
@@ -17,24 +18,24 @@ import { QuestionControlComponent } from '../question-control/question-control.c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SectionControlComponent {
-  @Input() sectionFormGroup!: FormGroup<any>;
+  @Input() sectionFormGroup!: SectionFormGroup;
 
   @Output() deleted = new EventEmitter<void>();
 
   constructor(
-    private readonly _formBuilder: UntypedFormBuilder,
+    private readonly formBuilder: FormBuilder,
   ) {}
 
   addQuestion(): void {
-    const section = this._formBuilder.group({
+    const section = this.formBuilder.group({
       question: '',
       type: 'question',
     });
 
-    (this.sectionFormGroup.get('firmControls') as FormArray).push(section);
+    this.sectionFormGroup.controls.firmControls.push(section);
   }
 
   deleteQuestion(i: number): void {
-    (this.sectionFormGroup.get('firmControls') as FormArray).removeAt(i);
+    this.sectionFormGroup.controls.firmControls.removeAt(i);
   }
 }
