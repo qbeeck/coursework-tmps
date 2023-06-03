@@ -1,17 +1,19 @@
 <mat-expansion-panel expanded [formGroup]="sectionFormGroup">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
+      Section
     </mat-panel-title>
   </mat-expansion-panel-header>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
 
   <button mat-button type="button" (click)="deleted.emit()">delete</button>
   <button mat-stroked-button type="button" (click)="addQuestion()">Add question</button>
 
-  <ng-container *ngFor="let sectionFirmControlchik of $any(sectionFormGroup.controls).firmControls.controls; let i = index">
-    <app-question-control [questionFormGroup]="sectionFirmControlchik" (deleted)="deleteQuestion(i)"></app-question-control>
+  <ng-container *ngFor="let questionFormGroup of sectionFormGroup.controls.sectionControls.controls; let i = index">
+    <app-question-control [questionFormGroup]="questionFormGroup" (deleted)="deleteQuestion(i)"></app-question-control>
   </ng-container>
 </mat-expansion-panel>

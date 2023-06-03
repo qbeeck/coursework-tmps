@@ -33,10 +33,10 @@ export class SectionControlComponent {
       type: 'question',
     });
 
-    this.sectionFormGroup.controls.firmControls.push(section);
+    this.sectionFormGroup.controls.sectionControls.push(section);
   }
 
   deleteQuestion(i: number): void {
-    this.sectionFormGroup.controls.firmControls.removeAt(i);
+    this.sectionFormGroup.controls.sectionControls.removeAt(i);
   }
 }

@@ -13,7 +13,7 @@ import { QuestionControlComponent } from '../question-control/question-control.c
 export type SectionFormGroup = FormGroup<{
   name: FormControl<string | null>;
   type: FormControl<string | null>;
-  firmControls: FormArray<QuestionFormGroup>;
+  sectionControls: FormArray<QuestionFormGroup>;
 }>
 
 export type QuestionFormGroup = FormGroup<{
@@ -44,7 +44,7 @@ export class CreateCustomFormComponent {
   customForm = this.formBuilder.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
-    firmControls: new FormArray<QuestionFormGroup | SectionFormGroup>([
+    customFormControls: new FormArray<QuestionFormGroup | SectionFormGroup>([
       this.formBuilder.group({ question: '', type: 'question' }),
     ]),
   });
@@ -57,10 +57,10 @@ export class CreateCustomFormComponent {
     const section = this.formBuilder.group({
       name: '',
       type: 'section',
-      firmControls: new FormArray<QuestionFormGroup>([]),
+      sectionControls: new FormArray<QuestionFormGroup>([]),
     });
 
-    this.customForm.controls.firmControls.push(section);
+    this.customForm.controls.customFormControls.push(section);
   }
 
   addQuestion(): void {
@@ -69,15 +69,15 @@ export class CreateCustomFormComponent {
       type: 'question',
     });
 
-    this.customForm.controls.firmControls.push(question);
+    this.customForm.controls.customFormControls.push(question);
   }
 
   deleteQuestion(i: number) {
-    this.customForm.controls.firmControls.removeAt(i);
+    this.customForm.controls.customFormControls.removeAt(i);
   }
 
   deleteSection(i: number) {
-    this.customForm.controls.firmControls.removeAt(i);
+    this.customForm.controls.customFormControls.removeAt(i);
   }
 
   save(): void {
