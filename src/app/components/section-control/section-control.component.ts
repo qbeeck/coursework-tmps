@@ -28,12 +28,13 @@ export class SectionControlComponent {
   ) {}
 
   addQuestion(): void {
-    const section = this.formBuilder.group({
+    const question = this.formBuilder.group({
       question: '',
       type: 'question',
+      answer: [{value: '', disabled: false }]
     });
 
-    this.sectionFormGroup.controls.sectionControls.push(section);
+    this.sectionFormGroup.controls.sectionControls.push(question);
   }
 
   deleteQuestion(i: number): void {

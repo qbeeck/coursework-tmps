@@ -19,6 +19,7 @@ export type SectionFormGroup = FormGroup<{
 export type QuestionFormGroup = FormGroup<{
   question: FormControl<string | null>;
   type: FormControl<string | null>;
+  answer: FormControl<string | null>;
 }>
 
 @Component({
@@ -45,7 +46,7 @@ export class CreateCustomFormComponent {
     name: ['', Validators.required],
     description: ['', Validators.required],
     customFormControls: new FormArray<QuestionFormGroup | SectionFormGroup>([
-      this.formBuilder.group({ question: '', type: 'question' }),
+      this.formBuilder.group({ question: 'he', type: 'question', answer: '' }),
     ]),
   });
 
@@ -67,6 +68,7 @@ export class CreateCustomFormComponent {
     const question = this.formBuilder.group({
       question: '',
       type: 'question',
+      answer: [{value: '', disabled: false }]
     });
 
     this.customForm.controls.customFormControls.push(question);
