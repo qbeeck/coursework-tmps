@@ -20,6 +20,9 @@
     <button *ngIf="!answerMode" mat-stroked-button [disabled]="customForm.invalid" style="margin-left: 10px;" color="primary" (click)="onSave()">
       {{ readonly ? 'Answer' : 'Save' }}
     </button>
+
+    <button mat-stroked-button *ngIf="!answerMode || !readonly" style="margin-left: 10px" color="primary" type="button" (click)="onSaveMemnto()">Save memento</button>
+    <button mat-stroked-button *ngIf="!answerMode || !readonly" style="margin-left: 10px" color="primary" type="button" (click)="restoreMemento.emit()">Restore previous memento</button>
   </mat-card>
 
   <mat-accordion style="margin-top: 10px; display: block;" multi>

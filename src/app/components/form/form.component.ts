@@ -47,6 +47,8 @@ export class FormComponent {
   @Input() answerMode = false;
 
   @Output() submited = new EventEmitter<CustomForm>();
+  @Output() saveMemnto = new EventEmitter<CustomForm>();
+  @Output() restoreMemento = new EventEmitter<void>();
 
   customForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -104,6 +106,18 @@ export class FormComponent {
     });
 
     this.submited.emit(form);
+  }
+
+  onSaveMemnto(): void {
+    const form = new CustomForm();
+
+    form.setName(this.customForm.value.name as string);
+    form.setDescription(this.customForm.value.description as string);
+    this.customForm.value.customFormControls?.forEach(c => {
+      form.addCustomFormControls(c as CustomFormControl);
+    });
+
+    this.saveMemnto.emit(form);
   }
 
   addSection(): void {
