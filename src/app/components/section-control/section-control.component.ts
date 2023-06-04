@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
   standalone: true,
   imports: [
     NgFor,
+    NgIf,
     QuestionControlComponent,
     ReactiveFormsModule,
     MatCardModule,
@@ -31,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class SectionControlComponent {
   @Input() sectionFormGroup!: SectionFormGroup;
+  @Input() readonly!: boolean;
 
   @Output() deleted = new EventEmitter<void>();
 

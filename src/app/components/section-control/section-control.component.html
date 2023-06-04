@@ -11,8 +11,10 @@
       <input matInput formControlName="name" />
     </mat-form-field>
 
-    <button mat-flat-button type="button" color="warn" (click)="deleted.emit()">delete</button>
-    <button mat-flat-button style="margin-top: 10px;" type="button" color="primary" (click)="addQuestion()">Add question</button>
+    <ng-container *ngIf="!readonly">
+      <button mat-flat-button type="button" color="warn" (click)="deleted.emit()">delete</button>
+      <button mat-flat-button style="margin-top: 10px;" type="button" color="primary" (click)="addQuestion()">Add question</button>
+    </ng-container>
   </div>
 
   <ng-container *ngFor="let questionFormGroup of sectionFormGroup.controls.sectionControls.controls; let i = index">

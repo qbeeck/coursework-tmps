@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormComponent } from '@components/form';
-import { ContactInformationFormCreator, CustomForm, EmptyFormCreator, PartyInviteFormCreator } from '@models';
 import { Router } from '@angular/router';
+
+import { ContactInformationFormCreator, CustomForm, EmptyFormCreator, PartyInviteFormCreator } from '@models';
 import { CustomFormsService } from 'src/app/services/custom-forms.service';
 
 @Component({
-  selector: 'app-create-custom-form',
+  selector: 'app-preview-custom-form',
   standalone: true,
   imports: [FormComponent],
-  templateUrl: './create-custom-form.component.html',
-  styleUrls: ['./create-custom-form.component.scss'],
+  templateUrl: './preview-custom-form.component.html',
+  styleUrls: ['./preview-custom-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateCustomFormComponent {
+export class PreviewCustomFormComponent {
   form: CustomForm;
 
   constructor(
