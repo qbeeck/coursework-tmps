@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,19 +10,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SectionControlComponent } from '../section-control/section-control.component';
 import { QuestionControlComponent } from '../question-control/question-control.component';
 import { FormComponent } from '@components/form';
-import { CustomForm } from '@models';
-
-export type SectionFormGroup = FormGroup<{
-  name: FormControl<string | null>;
-  type: FormControl<string | null>;
-  sectionControls: FormArray<QuestionFormGroup>;
-}>
-
-export type QuestionFormGroup = FormGroup<{
-  question: FormControl<string | null>;
-  type: FormControl<string | null>;
-  answer: FormControl<string | null>;
-}>
+import { ContactInformationFormCreator, CustomForm, EmptyFormCreator, PartyInviteFormCreator } from '@models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-custom-form',
@@ -45,7 +34,24 @@ export type QuestionFormGroup = FormGroup<{
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateCustomFormComponent {
-  form = new CustomForm();
+  form: CustomForm;
+
+  constructor(
+    private readonly router: Router,
+  ) {
+    const type = this.router.getCurrentNavigation()?.extras.state?.['formType'];
+
+    switch(type) {
+      case 'contact-information':
+        this.form = new ContactInformationFormCreator().factoryMethod();
+        break;
+      case 'party-invite':
+        this.form = new PartyInviteFormCreator().factoryMethod();
+        break;
+      default:
+        this.form = new EmptyFormCreator().factoryMethod();
+    }
+  }
 
   save(value: any): void {
     console.log(value);

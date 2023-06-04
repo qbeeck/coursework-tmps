@@ -13,6 +13,10 @@ const routes: Routes = [
     path: '',
     loadComponent: () => import('@components/main/main.component').then(c => c.MainComponent),
   },
+  {
+    path: 'create',
+    loadComponent: () => import('@components/create-custom-form').then(c => c.CreateCustomFormComponent),
+  },
 ];
 
 @NgModule({

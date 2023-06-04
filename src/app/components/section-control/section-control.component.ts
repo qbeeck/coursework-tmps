@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { QuestionControlComponent } from '../question-control/question-control.component';
-import { SectionFormGroup } from '@components/create-custom-form';
+import { SectionFormGroup } from '@components/form';
 
 @Component({
   selector: 'app-section-control',

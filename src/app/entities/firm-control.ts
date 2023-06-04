@@ -136,3 +136,48 @@ export class CustomFormTemplateBuilder {
     });
   }
 }
+
+
+/**
+ * Factory method pattern
+ */
+export interface FormCreator {
+  factoryMethod(): CustomForm;
+}
+
+export class EmptyFormCreator implements FormCreator {
+  factoryMethod(): CustomForm {
+    const builder = new CustomFormBuilder();
+    const templateBuilder = new CustomFormTemplateBuilder();
+
+    templateBuilder.setBuilder(builder);
+    templateBuilder.buildEmptyForm();
+
+    return builder.build();
+  }
+}
+
+export class ContactInformationFormCreator implements FormCreator {
+  factoryMethod(): CustomForm {
+    const builder = new CustomFormBuilder();
+    const templateBuilder = new CustomFormTemplateBuilder();
+
+    templateBuilder.setBuilder(builder);
+    templateBuilder.buildContactInformationForm();
+
+    return builder.build();
+  }
+}
+
+export class PartyInviteFormCreator implements FormCreator {
+  factoryMethod(): CustomForm {
+    const builder = new CustomFormBuilder();
+    const templateBuilder = new CustomFormTemplateBuilder();
+
+    templateBuilder.setBuilder(builder);
+    templateBuilder.buildPartyInviteForm();
+
+    return builder.build();
+  }
+}
+

@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { QuestionFormGroup } from '@components/create-custom-form';
+import { QuestionFormGroup } from '@components/form';
 
 @Component({
   selector: 'app-question-control',

@@ -4,6 +4,7 @@ import { MatBottomSheetRef, MatBottomSheetModule } from '@angular/material/botto
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatListModule } from '@angular/material/list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-forms-templates',
@@ -32,10 +33,15 @@ export class CustomFormsTemplatesComponent {
     },
   ];
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<CustomFormsTemplatesComponent>) {}
+  constructor(
+    private readonly bottomSheetRef: MatBottomSheetRef<CustomFormsTemplatesComponent>,
+    private readonly router: Router,
+  ) {}
 
-  openLink(event: MouseEvent, path: string): void {
+  openLink(event: MouseEvent, formType: string): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
+
+    this.router.navigate(['create'], { state: { formType } });
   }
 }
