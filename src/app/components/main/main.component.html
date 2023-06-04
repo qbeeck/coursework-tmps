@@ -3,11 +3,11 @@
     <mat-card-title *ngIf="!createdForms.length">You have not forms</mat-card-title>
 
     <mat-card-content>
-      <mat-list *ngIf="createdForms.length" role="list">
-        <mat-card-title *ngIf="!createdForms.length">Your forms</mat-card-title>
+      <mat-nav-list *ngIf="createdForms.length" role="list">
+        <mat-card-title>Your forms</mat-card-title>
 
         <mat-list-item *ngFor="let form of createdForms" role="listitem">{{ form.name }}</mat-list-item>
-      </mat-list>
+      </mat-nav-list>
     </mat-card-content>
   </ng-container>
 

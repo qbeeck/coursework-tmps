@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +12,7 @@ import { QuestionControlComponent } from '../question-control/question-control.c
 import { FormComponent } from '@components/form';
 import { ContactInformationFormCreator, CustomForm, EmptyFormCreator, PartyInviteFormCreator } from '@models';
 import { Router } from '@angular/router';
+import { CustomFormsService } from 'src/app/services/custom-forms.service';
 
 @Component({
   selector: 'app-create-custom-form',
@@ -35,9 +36,11 @@ import { Router } from '@angular/router';
 })
 export class CreateCustomFormComponent {
   form: CustomForm;
+  @ViewChild(FormComponent) customFormComponent!: FormComponent;
 
   constructor(
     private readonly router: Router,
+    private readonly customForms: CustomFormsService,
   ) {
     const type = this.router.getCurrentNavigation()?.extras.state?.['formType'];
 
@@ -53,7 +56,8 @@ export class CreateCustomFormComponent {
     }
   }
 
-  save(value: any): void {
-    console.log(value);
+  save(form: CustomForm): void {
+    this.customForms.addForm(form);
+    this.router.navigate(['']);
   }
 }

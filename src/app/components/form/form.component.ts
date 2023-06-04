@@ -45,7 +45,7 @@ export class FormComponent {
   @Input() form!: CustomForm;
   @Input() readonly = false;
 
-  @Output() submited = new EventEmitter<typeof this.customForm.value>();
+  @Output() submited = new EventEmitter<CustomForm>();
 
   customForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -82,7 +82,7 @@ export class FormComponent {
   onSave(): void {
     if (this.customForm.invalid) return;
 
-    this.submited.emit(this.customForm.value);
+    this.submited.emit(this.customForm.value as CustomForm);
   }
 
   addSection(): void {
