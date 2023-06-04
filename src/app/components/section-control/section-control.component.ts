@@ -9,11 +9,22 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { QuestionControlComponent } from '../question-control/question-control.component';
 import { SectionFormGroup } from '@components/form';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-section-control',
   standalone: true,
-  imports: [NgFor, QuestionControlComponent, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatExpansionModule],
+  imports: [
+    NgFor,
+    QuestionControlComponent,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatDividerModule,
+  ],
   templateUrl: './section-control.component.html',
   styleUrls: ['./section-control.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

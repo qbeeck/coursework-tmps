@@ -5,15 +5,19 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" />
-  </mat-form-field>
+  <div style="display: flex; flex-direction: column;">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
 
-  <button mat-button type="button" (click)="deleted.emit()">delete</button>
-  <button mat-stroked-button type="button" (click)="addQuestion()">Add question</button>
+    <button mat-flat-button type="button" color="warn" (click)="deleted.emit()">delete</button>
+    <button mat-flat-button style="margin-top: 10px;" type="button" color="primary" (click)="addQuestion()">Add question</button>
+  </div>
 
   <ng-container *ngFor="let questionFormGroup of sectionFormGroup.controls.sectionControls.controls; let i = index">
     <app-question-control [questionFormGroup]="questionFormGroup" (deleted)="deleteQuestion(i)"></app-question-control>
+
+    <mat-divider style="margin-top: 10px;"></mat-divider>
   </ng-container>
 </mat-expansion-panel>

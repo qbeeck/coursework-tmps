@@ -137,7 +137,6 @@ export class CustomFormTemplateBuilder {
   }
 }
 
-
 /**
  * Factory method pattern
  */

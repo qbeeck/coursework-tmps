@@ -1,25 +1,25 @@
 <form [formGroup]="customForm">
   <mat-card>
     <mat-card-title>
-      <mat-form-field>
+      <mat-form-field style="width: 100%;">
         <mat-label>Form Name</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
     </mat-card-title>
 
     <mat-card-subtitle>
-      <mat-form-field>
+      <mat-form-field style="width: 100%;">
         <mat-label>Form Description</mat-label>
         <input matInput formControlName="description" />
       </mat-form-field>
     </mat-card-subtitle>
 
     <button mat-stroked-button color="primary" type="button" (click)="addSection()">Add section</button>
-    <button mat-stroked-button color="primary" type="button" (click)="addQuestion()">Add question</button>
-    <button *ngIf="!readonly" mat-stroked-button color="primary" (click)="onSave()">Save</button>
+    <button mat-stroked-button color="primary" style="margin-left: 10px;" type="button" (click)="addQuestion()">Add question</button>
+    <button *ngIf="!readonly" mat-stroked-button style="margin-left: 10px;" color="primary" (click)="onSave()">Save</button>
   </mat-card>
 
-  <mat-accordion multi>
+  <mat-accordion style="margin-top: 10px; display: block;" multi>
     <ng-container *ngFor="let firmControl of customForm.controls.customFormControls.controls; let i = index">
       <app-section-control
         *ngIf="firmControl.value.type === 'section'"
