@@ -6,7 +6,31 @@
       <mat-nav-list *ngIf="createdForms.length" role="list">
         <mat-card-title>Your forms</mat-card-title>
 
-        <mat-list-item *ngFor="let form of createdForms" role="listitem">{{ form.name }}</mat-list-item>
+        <mat-list-item *ngFor="let form of createdForms" role="listitem">
+          {{ form.name }}
+
+          <span style="flex: 1 auto"></span>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>preview</mat-icon>
+              <span>Preview</span>
+            </button>
+
+            <button mat-menu-item (click)="cloneForm(form)">
+              <mat-icon>content_copy</mat-icon>
+              <span>Copy</span>
+            </button>
+
+            <button mat-menu-item (click)="deleteForm(form)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </mat-list-item>
       </mat-nav-list>
     </mat-card-content>
   </ng-container>

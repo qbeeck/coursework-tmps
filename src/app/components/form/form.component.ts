@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { QuestionControlComponent } from '@components/question-control';
 import { SectionControlComponent } from '@components/section-control';
-import { CustomForm } from '@models';
+import { CustomForm, CustomFormControl } from '@models';
 
 export type SectionFormGroup = FormGroup<{
   name: FormControl<string | null>;
@@ -82,7 +82,15 @@ export class FormComponent {
   onSave(): void {
     if (this.customForm.invalid) return;
 
-    this.submited.emit(this.customForm.value as CustomForm);
+    const form = new CustomForm();
+
+    form.setName(this.customForm.value.name as string);
+    form.setDescription(this.customForm.value.description as string);
+    this.customForm.value.customFormControls?.forEach(c => {
+      form.addCustomFormControls(c as CustomFormControl);
+    });
+
+    this.submited.emit(form);
   }
 
   addSection(): void {

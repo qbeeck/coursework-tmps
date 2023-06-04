@@ -1,4 +1,7 @@
-abstract class CustomFormControl {
+/**
+ * Composite Pattern
+ */
+export abstract class CustomFormControl {
   type: string;
 
   constructor(type: string) {
@@ -34,6 +37,7 @@ export class CustomForm {
   name = '';
   description = '';
   customFormControls: CustomFormControl[] = [];
+  public circularReference!: CustomFormWithBackReference;
 
   setName(name: string): void {
     this.name = name;
@@ -45,6 +49,28 @@ export class CustomForm {
 
   addCustomFormControls(formControls: CustomFormControl): void {
     this.customFormControls.push(formControls);
+  }
+
+  /**
+   * Prototype Pattern
+   */
+  clone(): CustomForm {
+    const clone = Object.create(this);
+
+    clone.circularReference = {
+        ...this.circularReference,
+        prototype: { ...this },
+    };
+
+    return clone;
+  }
+}
+
+class CustomFormWithBackReference {
+  prototype: any;
+
+  constructor(prototype: any) {
+    this.prototype = prototype;
   }
 }
 
