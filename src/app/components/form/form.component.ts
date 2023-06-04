@@ -64,14 +64,14 @@ export class FormComponent {
       let group: any;
 
       if (control.type === 'section') {
-        const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({ ...c, answer: [{ value: control.answe, disabled: this.readonly }] }))
+        const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({ ...c, answer: [{ value: control.answe, disabled: !this.readonly }] }))
 
         group = this.formBuilder.group({
           ...control,
           sectionControls: this.formBuilder.array(sectionControls)
         });
       } else {
-        group = this.formBuilder.group({ ...control, answer: [{ value: control.answe, disabled: this.readonly }] });
+        group = this.formBuilder.group({ ...control, answer: [{ value: control.answe, disabled: !this.readonly }] });
       }
 
 

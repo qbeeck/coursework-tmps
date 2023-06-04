@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormComponent } from '@components/form';
 import { Router } from '@angular/router';
 
-import { ContactInformationFormCreator, CustomForm, EmptyFormCreator, PartyInviteFormCreator } from '@models';
+import { CustomForm } from '@models';
 import { CustomFormsService } from 'src/app/services/custom-forms.service';
 
 @Component({
@@ -20,18 +20,7 @@ export class PreviewCustomFormComponent {
     private readonly router: Router,
     private readonly customForms: CustomFormsService,
   ) {
-    const type = this.router.getCurrentNavigation()?.extras.state?.['formType'];
-
-    switch(type) {
-      case 'contact-information':
-        this.form = new ContactInformationFormCreator().factoryMethod();
-        break;
-      case 'party-invite':
-        this.form = new PartyInviteFormCreator().factoryMethod();
-        break;
-      default:
-        this.form = new EmptyFormCreator().factoryMethod();
-    }
+    this.form = this.router.getCurrentNavigation()?.extras.state?.['form'];
   }
 
   save(form: CustomForm): void {

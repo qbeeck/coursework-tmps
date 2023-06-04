@@ -38,7 +38,7 @@
       >
         <mat-expansion-panel-header>Question</mat-expansion-panel-header>
 
-        <app-question-control [questionFormGroup]="$any(firmControl)" (deleted)="deleteQuestion(i)"></app-question-control>
+        <app-question-control [questionFormGroup]="$any(firmControl)" [readonly]="readonly" (deleted)="deleteQuestion(i)"></app-question-control>
       </mat-expansion-panel>
     </ng-container>
   </mat-accordion>

@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'create',
     loadComponent: () => import('@components/create-custom-form').then(c => c.CreateCustomFormComponent),
   },
+  {
+    path: 'preview',
+    loadComponent: () => import('@components/preview-custom-form/preview-custom-form.component').then(c => c.PreviewCustomFormComponent),
+  },
 ];
 
 @NgModule({

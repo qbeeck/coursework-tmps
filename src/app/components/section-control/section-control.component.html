@@ -18,7 +18,7 @@
   </div>
 
   <ng-container *ngFor="let questionFormGroup of sectionFormGroup.controls.sectionControls.controls; let i = index">
-    <app-question-control [questionFormGroup]="questionFormGroup" (deleted)="deleteQuestion(i)"></app-question-control>
+    <app-question-control [questionFormGroup]="questionFormGroup" [readonly]="readonly" (deleted)="deleteQuestion(i)"></app-question-control>
 
     <mat-divider style="margin-top: 10px;"></mat-divider>
   </ng-container>

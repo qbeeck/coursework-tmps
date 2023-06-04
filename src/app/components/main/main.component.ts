@@ -10,6 +10,7 @@ import { CustomForm } from '@models';
 import { Observable } from 'rxjs';
 import { CustomFormsService } from 'src/app/services/custom-forms.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -34,6 +35,7 @@ export class MainComponent {
   createdForms$: Observable<CustomForm[]>;
 
   constructor(
+    private readonly router: Router,
     private readonly customForms: CustomFormsService,
     private readonly bottomSheet: MatBottomSheet,
   ) {
@@ -42,6 +44,10 @@ export class MainComponent {
 
   openBottomSheet(): void {
     this.bottomSheet.open(CustomFormsTemplatesComponent);
+  }
+
+  previewForm(form: CustomForm): void {
+    this.router.navigate(['preview'], { state: { form } });
   }
 
   deleteForm(form: CustomForm): void {
