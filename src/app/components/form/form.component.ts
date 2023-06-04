@@ -60,18 +60,25 @@ export class FormComponent {
   ngOnInit(): void {
     this.customForm.patchValue(this.form);
 
+    if (this.readonly) {
+      this.customForm.controls.name.disable();
+      this.customForm.controls.description.disable();
+    }
+
     this.form.customFormControls.forEach((control: any) => {
       let group: any;
 
       if (control.type === 'section') {
-        const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({ ...c, answer: [{ value: control.answe, disabled: !this.readonly }] }))
+        const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({
+          answer: [{ value: control.answer, disabled: !this.readonly }, this.readonly ? Validators.required : []],
+        }));
 
         group = this.formBuilder.group({
           ...control,
           sectionControls: this.formBuilder.array(sectionControls)
         });
       } else {
-        group = this.formBuilder.group({ ...control, answer: [{ value: control.answe, disabled: !this.readonly }] });
+        group = this.formBuilder.group({ ...control, answer: [{ value: control.answer, disabled: !this.readonly }, this.readonly ? Validators.required : []] });
       }
 
 
@@ -107,7 +114,7 @@ export class FormComponent {
     const question = this.formBuilder.group({
       question: '',
       type: 'question',
-      answer: [{value: '', disabled: false }]
+      answer: [{value: '', disabled: this.readonly }, this.readonly ? Validators.required : []],
     });
 
     this.customForm.controls.customFormControls.push(question);
