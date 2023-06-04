@@ -1,3 +1,5 @@
+import { Environment } from "../core/environment";
+
 /**
  * Composite Pattern
  */
@@ -178,6 +180,8 @@ export class EmptyFormCreator implements FormCreator {
     templateBuilder.setBuilder(builder);
     templateBuilder.buildEmptyForm();
 
+    Environment.getInstance().log('Created empty form by template');
+
     return builder.build();
   }
 }
@@ -189,6 +193,9 @@ export class ContactInformationFormCreator implements FormCreator {
 
     templateBuilder.setBuilder(builder);
     templateBuilder.buildContactInformationForm();
+
+    Environment.getInstance().log('Created contact form by template');
+
 
     return builder.build();
   }
@@ -202,7 +209,8 @@ export class PartyInviteFormCreator implements FormCreator {
     templateBuilder.setBuilder(builder);
     templateBuilder.buildPartyInviteForm();
 
+    Environment.getInstance().log('Created party invite form by template');
+
     return builder.build();
   }
 }
-

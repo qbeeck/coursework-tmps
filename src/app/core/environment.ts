@@ -25,6 +25,14 @@ export class Environment {
     this._environment = environment;
   }
 
+  log(value: string): void {
+    if (!this.isLoggerEnabled) return;
+
+    const date = new Date();
+
+    console.log(`LOGGER | ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} value ${value}`);
+  }
+
   get isLoggerEnabled(): boolean {
     if (!this._environment) throw Error('Not setted environment');
 
