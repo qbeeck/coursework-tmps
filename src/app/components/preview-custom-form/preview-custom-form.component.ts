@@ -3,10 +3,10 @@ import { FormComponent } from '@components/form';
 import { Router } from '@angular/router';
 
 import { CustomForm } from '@models';
-import { CustomFormsService } from 'src/app/services/custom-forms.service';
 import { CustomFormObserver } from 'src/app/entities/observer';
 import { FormAnswered } from 'src/app/entities/observer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AnsweredFormsService } from 'src/app/services/answered-forms.service';
 
 @Component({
   selector: 'app-preview-custom-form',
@@ -25,7 +25,7 @@ export class PreviewCustomFormComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly customForms: CustomFormsService,
+    private readonly answeredForms: AnsweredFormsService,
   ) {
     this.form = this.router.getCurrentNavigation()?.extras.state?.['form'];
 
@@ -38,6 +38,7 @@ export class PreviewCustomFormComponent {
 
   save(form: CustomForm): void {
     this.notifyAll();
+    this.answeredForms.addForm(this.form, form);
     this.router.navigate(['']);
   }
 

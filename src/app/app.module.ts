@@ -21,6 +21,14 @@ const routes: Routes = [
     path: 'preview',
     loadComponent: () => import('@components/preview-custom-form/preview-custom-form.component').then(c => c.PreviewCustomFormComponent),
   },
+  {
+    path: 'edit',
+    loadComponent: () => import('@components/edit-custom-form/edit-custom-form.component').then(c => c.EditCustomFormComponent),
+  },
+  {
+    path: 'answer',
+    loadComponent: () => import('@components/answer-form/answer-form.component').then(c => c.AnswerFormComponent),
+  },
 ];
 
 @NgModule({

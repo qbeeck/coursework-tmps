@@ -17,7 +17,7 @@
 
     <button *ngIf="!readonly" mat-stroked-button color="primary" type="button" (click)="addSection()">Add section</button>
     <button *ngIf="!readonly" mat-stroked-button color="primary" style="margin-left: 10px;" type="button" (click)="addQuestion()">Add question</button>
-    <button mat-stroked-button [disabled]="customForm.invalid" style="margin-left: 10px;" color="primary" (click)="onSave()">
+    <button *ngIf="!answerMode" mat-stroked-button [disabled]="customForm.invalid" style="margin-left: 10px;" color="primary" (click)="onSave()">
       {{ readonly ? 'Answer' : 'Save' }}
     </button>
   </mat-card>

@@ -1,12 +1,12 @@
 <mat-card>
-  <ng-container *ngIf="createdForms$ | async as createdForms">
-    <mat-card-title *ngIf="!createdForms.length">You have not forms</mat-card-title>
+  <ng-container *ngIf="data$ | async as data">
+    <mat-card-title *ngIf="!data.forms.length">You have not forms</mat-card-title>
 
     <mat-card-content>
-      <mat-nav-list *ngIf="createdForms.length" role="list">
+      <mat-nav-list *ngIf="data.forms.length" role="list">
         <mat-card-title>Your forms</mat-card-title>
 
-        <mat-list-item *ngFor="let form of createdForms" role="listitem">
+        <mat-list-item *ngFor="let form of data.forms" role="listitem">
           {{ form.name }}
 
           <span style="flex: 1 auto"></span>
@@ -14,10 +14,21 @@
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
           </button>
+
           <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="data.answeredForms.get(form)?.length" [matMenuTriggerFor]="answers">
+              <mat-icon>done</mat-icon>
+              <span>All Answers</span>
+            </button>
+
+            <button mat-menu-item (click)="edit(form)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+
             <button mat-menu-item (click)="previewForm(form)">
               <mat-icon>preview</mat-icon>
-              <span>Preview</span>
+              <span>Answer</span>
             </button>
 
             <button mat-menu-item (click)="cloneForm(form)">
@@ -28,6 +39,16 @@
             <button mat-menu-item (click)="deleteForm(form)">
               <mat-icon>delete</mat-icon>
               <span>Delete</span>
+            </button>
+          </mat-menu>
+
+          <mat-menu #answers="matMenu">
+            <button
+              mat-menu-item
+              *ngFor="let answer of data.answeredForms.get(form); let i = index"
+              (click)="checkAnswer(answer)"
+            >
+              Answer {{ i + 1 }}
             </button>
           </mat-menu>
         </mat-list-item>

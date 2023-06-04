@@ -7,10 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CustomFormsTemplatesComponent } from '@components/custom-forms-templates/custom-forms-templates.component';
 import { CustomForm } from '@models';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { CustomFormsService } from 'src/app/services/custom-forms.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { AnsweredFormsService } from 'src/app/services/answered-forms.service';
 
 @Component({
   selector: 'app-main',
@@ -32,18 +33,36 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent {
-  createdForms$: Observable<CustomForm[]>;
+
+  data$: Observable<{
+    forms: CustomForm[];
+    answeredForms: Map<CustomForm, CustomForm[]>;
+  }>
 
   constructor(
     private readonly router: Router,
     private readonly customForms: CustomFormsService,
+    private readonly answeredForms: AnsweredFormsService,
     private readonly bottomSheet: MatBottomSheet,
   ) {
-    this.createdForms$ = this.customForms.customForms$;
+    this.data$ = combineLatest([
+      this.customForms.customForms$,
+      this.answeredForms.answeredForms$,
+    ]).pipe(
+      map(([forms, answeredForms]) => ({ forms, answeredForms }))
+    )
   }
 
   openBottomSheet(): void {
     this.bottomSheet.open(CustomFormsTemplatesComponent);
+  }
+
+  edit(form: CustomForm): void {
+    this.router.navigate(['edit'], { state: { form } });
+  }
+
+  checkAnswer(form: CustomForm): void {
+    this.router.navigate(['answer'], { state: { form }});
   }
 
   previewForm(form: CustomForm): void {

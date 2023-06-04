@@ -44,6 +44,7 @@ export type QuestionFormGroup = FormGroup<{
 export class FormComponent {
   @Input() form!: CustomForm;
   @Input() readonly = false;
+  @Input() answerMode = false;
 
   @Output() submited = new EventEmitter<CustomForm>();
 
@@ -70,7 +71,8 @@ export class FormComponent {
 
       if (control.type === 'section') {
         const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({
-          answer: [{ value: control.answer, disabled: !this.readonly }, this.readonly ? Validators.required : []],
+          question: [{ value: c.question, disabled: this.readonly }],
+          answer: [{ value: c.answer, disabled: !this.readonly || this.answerMode }, this.readonly ? Validators.required : []],
         }));
 
         group = this.formBuilder.group({
@@ -78,7 +80,11 @@ export class FormComponent {
           sectionControls: this.formBuilder.array(sectionControls)
         });
       } else {
-        group = this.formBuilder.group({ ...control, answer: [{ value: control.answer, disabled: !this.readonly }, this.readonly ? Validators.required : []] });
+        group = this.formBuilder.group({
+          ...control,
+          question: [{ value: control.question, disabled: this.readonly }],
+          answer: [{ value: control.answer, disabled: !this.readonly || this.answerMode }, this.readonly ? Validators.required : []],
+        });
       }
 
 

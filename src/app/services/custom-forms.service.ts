@@ -19,6 +19,16 @@ export class CustomFormsService {
     this.forms$.next(forms);
   }
 
+  updateForm(prev: CustomForm, form: CustomForm) {
+    const forms = this.forms$.value;
+
+    const newArray = [...forms];
+    const index = newArray.findIndex(f => f === prev);
+    newArray[index] = form;
+
+    this.forms$.next(newArray);
+  }
+
   deleteForm(form: CustomForm) {
     const forms = this.forms$.value;
 
