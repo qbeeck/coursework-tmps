@@ -71,7 +71,7 @@ export class FormComponent {
 
       if (control.type === 'section') {
         const sectionControls = control.sectionControls.map((c: any) => this.formBuilder.group({
-          question: [{ value: c.question, disabled: this.readonly }],
+          question: [{ value: c.question, disabled: this.readonly }, !this.readonly ? Validators.required : []],
           answer: [{ value: c.answer, disabled: !this.readonly || this.answerMode }, this.readonly ? Validators.required : []],
         }));
 
@@ -82,7 +82,7 @@ export class FormComponent {
       } else {
         group = this.formBuilder.group({
           ...control,
-          question: [{ value: control.question, disabled: this.readonly }],
+          question: [{ value: control.question, disabled: this.readonly }, !this.readonly ? Validators.required : []],
           answer: [{ value: control.answer, disabled: !this.readonly || this.answerMode }, this.readonly ? Validators.required : []],
         });
       }
@@ -118,7 +118,7 @@ export class FormComponent {
 
   addQuestion(): void {
     const question = this.formBuilder.group({
-      question: '',
+      question: [{ value: '', disabled: this.readonly }, !this.readonly ? Validators.required : []],
       type: 'question',
       answer: [{value: '', disabled: this.readonly }, this.readonly ? Validators.required : []],
     });
