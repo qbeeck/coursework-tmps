@@ -10,7 +10,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SectionControlComponent } from '../section-control/section-control.component';
 import { QuestionControlComponent } from '../question-control/question-control.component';
 import { FormComponent } from '@components/form';
-import { CustomForm, CustomFormBuilder, CustomFormTemplateBuilder } from '@models';
+import { CustomForm } from '@models';
 
 export type SectionFormGroup = FormGroup<{
   name: FormControl<string | null>;
@@ -46,16 +46,6 @@ export type QuestionFormGroup = FormGroup<{
 })
 export class CreateCustomFormComponent {
   form = new CustomForm();
-
-  formb = new CustomFormBuilder();
-  template = new CustomFormTemplateBuilder();
-
-  constructor() {
-    this.template.setBuilder(this.formb);
-    this.template.buildPartyInviteForm();
-
-    this.form = this.formb.build();
-  }
 
   save(value: any): void {
     console.log(value);

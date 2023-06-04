@@ -1,5 +1,7 @@
-<mat-list>
-  <mat-list-item *ngFor="let template of templates" (click)="openLink($event, template.path)">
-    <span mat-line>{{ template.text }}</span>
+<mat-nav-list>
+  <mat-list-item *ngFor="let template of templates"(click)="openLink($event, template.form)">
+    <mat-icon matListItemIcon class="icon">{{ template.icon }}</mat-icon>
+
+    <div matListItemTitle>{{ template.text }}</div>
   </mat-list-item>
-</mat-list>
+</mat-nav-list>
